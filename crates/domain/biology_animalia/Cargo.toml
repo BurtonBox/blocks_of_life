@@ -1,0 +1,11 @@
+[package]
+name = "biology_animalia"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+biology = { path = "../biology" }
+biology_shared = { path = "../../shared/biology_shared"}

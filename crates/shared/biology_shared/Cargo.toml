@@ -1,0 +1,10 @@
+[package]
+name = "biology_shared"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+uuid = { version = "1.18.1", features = ["v4"]}

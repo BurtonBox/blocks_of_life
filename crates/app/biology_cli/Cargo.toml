@@ -1,0 +1,12 @@
+[package]
+name = "biology_cli"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+biology = { path = "../../domain/biology" }
+biology_animalia = { path = "../../domain/biology_animalia" }
+uuid = { version = "1.18.1", features = ["v4"] }
