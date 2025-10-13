@@ -5,4 +5,4 @@ pub mod moniker;
 
 pub use model::Human;
 pub use builder::HumanBuilder;
-pub use moniker::{MonikerType, Moniker};
+pub use moniker::{Moniker};

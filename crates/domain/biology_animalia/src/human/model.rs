@@ -1,11 +1,10 @@
-use crate::{HumanBuilder,MonikerType};
+use crate::{HumanBuilder, Moniker};
 use biology::Sex;
-use biology_shared::Identifier;
-
+use core_shared::Identifier;
 
 pub struct Human {
     pub id: Identifier,
-    pub name: MonikerType,
+    pub name: Moniker,
     pub sex: Sex,
 }
 
@@ -13,7 +12,7 @@ impl Human {
     pub fn new() -> Self {
         Self {
             id: Identifier::new(),
-            name: MonikerType::Designation(String::from("Unknown")),
+            name: Moniker::Designation(String::from("Unknown")),
             sex: Sex::Unknown,
         }
     }

@@ -8,7 +8,7 @@ members = [
     "crates/domain/biology_fungi",
     "crates/domain/biology_plantae",
     "crates/domain/biology_protista",
-    "crates/shared/biology_shared"]
+    "crates/shared/biology_shared", "crates/shared/core_shared"]
 resolver = "3"
 
 [workspace.package]

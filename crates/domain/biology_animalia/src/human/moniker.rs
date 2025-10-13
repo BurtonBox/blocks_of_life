@@ -1,27 +1,25 @@
-#[derive(Debug, Default, Clone)]
-pub struct Moniker {
-    pub prefix: Option<String>,
-    pub first: Option<String>,
-    pub middle: Option<String>,
-    pub last: Option<String>,
-    pub suffix: Option<String>,
-}
-
-impl Moniker {
-    pub fn from_full_name(full_name: &str) -> Self {
-        let parts: Vec<&str> = full_name.split_whitespace().collect();
-        match parts.len() {
-            1 => Self { first: Some(parts[0].to_string()), ..Default::default() },
-            2 => Self { first: Some(parts[0].to_string()), last: Some(parts[1].to_string()), ..Default::default() },
-            3 => Self { first: Some(parts[0].to_string()), middle: Some(parts[1].to_string()), last: Some(parts[2].to_string()), ..Default::default() },
-            _ => Self::default(),
-        }
-    }
-}
+use biology_shared::Nomenclature;
+use crate::{Human, NameParts};
 
 #[derive(Debug, Clone)]
-pub enum MonikerType {
-    Name(Moniker),
+pub enum Moniker {
+    Name(NameParts),
     Designation(String),
 }
 
+impl Nomenclature for Moniker {
+    fn display_name(&self) -> String {
+        match self {
+            Moniker::Name(name) => {
+                let mut parts = vec![];
+                if let Some(prefix) = &name.prefix { parts.push(prefix.clone()); }
+                if let Some(first) = &name.first { parts.push(first.clone()); }
+                if let Some(middle) = &name.middle { parts.push(middle.clone()); }
+                if let Some(last) = &name.last { parts.push(last.clone()); }
+                if let Some(suffix) = &name.suffix { parts.push(suffix.clone()); }
+                parts.join(" ")
+            }
+            Moniker::Designation(title) => title.clone(),
+        }
+    }
+}

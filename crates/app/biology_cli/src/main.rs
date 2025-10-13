@@ -1,5 +1,6 @@
-use biology::{Nomenclature, Sex};
-use biology_animalia::{Human, Moniker};
+use biology::{Sex};
+use biology_shared::Nomenclature;
+use biology_animalia::{Human, NameParts};
 
 fn main() {
 
@@ -9,7 +10,7 @@ fn main() {
         .build();
 
     let john = Human::builder()
-        .name(Moniker::from_full_name("John Hicks"))
+        .name(NameParts::from_full_name("John Hicks"))
         .sex(Sex::Male)
         .build();
 

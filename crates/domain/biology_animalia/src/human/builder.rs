@@ -1,6 +1,6 @@
 use biology::Sex;
-use biology_shared::Identifier;
-use crate::{Human, Moniker, MonikerType};
+use core_shared::Identifier;
+use crate::{Human, Moniker, NameParts};
 
 pub struct HumanBuilder {
     pub id: Identifier,
@@ -9,7 +9,7 @@ pub struct HumanBuilder {
     pub name_middle: Option<String>,
     pub name_last: Option<String>,
     pub name_suffix: Option<String>,
-    pub name_moniker: Option<Moniker>,
+    pub name_moniker: Option<NameParts>,
     pub name_designation: Option<String>,
     pub sex: Sex,
 }
@@ -34,7 +34,7 @@ impl HumanBuilder {
         self
     }
 
-    pub fn name(mut self, moniker: Moniker) -> Self {
+    pub fn name(mut self, moniker: NameParts) -> Self {
         self.name_moniker = Some(moniker);
         self
     }
@@ -47,13 +47,13 @@ impl HumanBuilder {
     pub fn build(self) -> Human {
         let name = if let Some(des) = self.name_designation {
             // If a designation was provided, it wins.
-            MonikerType::Designation(des)
+            Moniker::Designation(des)
         } else if let Some(mon) = self.name_moniker {
-            MonikerType::Name(mon)
+            Moniker::Name(mon)
         }
         else {
             // Otherwise, assemble a structured name from the parts.
-            MonikerType::Name(Moniker {
+            Moniker::Name(NameParts {
                 prefix: self.name_prefix,
                 first: self.name_first,
                 middle: self.name_middle,
