@@ -8,6 +8,5 @@ license.workspace = true
 
 [dependencies]
 biology = { path = "../../domain/biology" }
-biology_shared = { path = "../../shared/biology_shared"}
 biology_animalia = { path = "../../domain/biology_animalia" }
-uuid = { version = "1.18.1", features = ["v4"] }
+core_shared = { path = "../../shared/core_shared"}

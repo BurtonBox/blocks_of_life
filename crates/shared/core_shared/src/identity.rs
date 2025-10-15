@@ -1,6 +1,6 @@
-use uuid::Uuid;
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
+use uuid::Uuid;
 
 pub struct Identifier(Uuid);
 

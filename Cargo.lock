@@ -5,13 +5,15 @@ version = 4
 [[package]]
 name = "biology"
 version = "0.1.0"
+dependencies = [
+ "core_shared",
+]
 
 [[package]]
 name = "biology_animalia"
 version = "0.1.0"
 dependencies = [
  "biology",
- "biology_shared",
  "core_shared",
 ]
 
@@ -29,8 +31,7 @@ version = "0.1.0"
 dependencies = [
  "biology",
  "biology_animalia",
- "biology_shared",
- "uuid",
+ "core_shared",
 ]
 
 [[package]]
@@ -43,10 +44,6 @@ version = "0.1.0"
 
 [[package]]
 name = "biology_protista"
-version = "0.1.0"
-
-[[package]]
-name = "biology_shared"
 version = "0.1.0"
 
 [[package]]
