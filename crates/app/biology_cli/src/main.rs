@@ -11,6 +11,7 @@ use biology_animalia::{Human, NameParts};
 use core_shared::Centimeters;
 
 fn main() {
+
     let stephen = Human::builder()
         .designation(String::from("Case #10288377"))
         .sex(Sex::Male)
@@ -25,52 +26,38 @@ fn main() {
 
     println!("{}", stephen.get_vitals());
 
-    let john = Human::builder()
-        .name(NameParts::from_full_name("John Hicks"))
-        .sex(Sex::Male)
-        .with_vitals(VitalStatus::Alive(LiveVitals::new(
-            BloodPressure(130, 40),
-            Celsius(31),
-            BPM(25),
-            25,
-        )))
-        .using_template(&templates::regional_defaults::AVG_NORTH_AMERICAN_MALE)
-        .build();
-
     // Create an ecosystem with environmental context
-    let forest_environment = Environment {
-        climate: Climate::Temperate,
-        terrain: Terrain::Forest,
-        altitude: Centimeters(500),
-        humidity: 0.7,
+    let desert_environment = Environment {
+        climate: Climate::Desert,
+        terrain: Terrain::Plains,
+        altitude: Centimeters(42800),
+        humidity: 0.14,
     };
 
-    let mut forest_ecosystem = Population::new(forest_environment);
+    let mut desert_ecosystem = Population::new(desert_environment);
 
     // Add members to the ecosystem
-    forest_ecosystem.add_member(Body::new(&stephen));
-    forest_ecosystem.add_member(Body::new(&john));
+    desert_ecosystem.add_member(Body::new(&stephen));
 
     // Add some ecological interactions
-    forest_ecosystem.add_interaction(Interaction::Mutualism {
-        participant1_id: 0, // Stephen
-        participant2_id: 4, // Yucca plant
-        benefit: "Humans provide care, plants provide oxygen".to_string(),
+    desert_ecosystem.add_interaction(Interaction::Predation {
+        predator_id: 0,
+        prey_id: 10,
     });
 
-    forest_ecosystem.add_interaction(Interaction::Competition {
-        competitor1_id: 0, // Stephen
-        competitor2_id: 1, // Shuyun
+    desert_ecosystem.add_interaction(Interaction::Competition {
+        competitor1_id: 0,
+        competitor2_id: 1,
         resource: "Food resources".to_string(),
     });
 
     println!("Forest Ecosystem:");
-    println!("Environment: {:?}", forest_ecosystem.environment);
-    println!("Population size: {}", forest_ecosystem.size());
-    println!("Interactions: {} recorded", forest_ecosystem.interactions.len());
+    println!("Environment: {:?}", desert_ecosystem.environment);
+    println!("Population size: {}", desert_ecosystem.size());
+    println!("Interactions: {} recorded", desert_ecosystem.interactions.len());
     println!("");
 
-    for body in &forest_ecosystem.members {
+    for body in &desert_ecosystem.members {
         body.display_summary();
         println!("");
     }
@@ -81,5 +68,5 @@ fn main() {
         stephen.display_name(),
         stephen.sex
     );
-    println!("{} : {} ({})", john.id, john.display_name(), john.sex);
+
 }
