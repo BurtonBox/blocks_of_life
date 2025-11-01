@@ -12,9 +12,9 @@ use biology_animalia::{Human, NameParts};
 #[test]
 fn test_human_creation_with_builder() {
     let human = Human::builder()
-        .name(NameParts::from_full_name("John Doe"))
+        .name(NameParts::from("John Doe"))
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     assert!(matches!(human.sex, Sex::Male));
@@ -26,7 +26,7 @@ fn test_human_with_designation() {
     let human = Human::builder()
         .designation("Case #12345".to_string())
         .sex(Sex::Female)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     assert_eq!(human.display_name(), "Case #12345");
@@ -34,11 +34,11 @@ fn test_human_with_designation() {
 
 #[test]
 fn test_human_name_parts_parsing() {
-    let name = NameParts::from_full_name("Jane Smith");
+    let name = NameParts::from("Jane Smith");
     let human = Human::builder()
         .name(name)
         .sex(Sex::Female)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     let display = human.display_name();
@@ -59,7 +59,7 @@ fn test_human_with_vitals() {
         .designation("Test Subject".to_string())
         .sex(Sex::Unknown)
         .with_vitals(vitals)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     assert!(matches!(human.vitals, VitalStatus::Alive(_)));
@@ -70,7 +70,7 @@ fn test_human_anatomy_trait() {
     let human = Human::builder()
         .designation("Test".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     let anatomy = human.describe_anatomy();
@@ -84,7 +84,7 @@ fn test_human_mobility_trait() {
     let human = Human::builder()
         .designation("Test".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     let mobility = human.describe_locomotion();
@@ -94,9 +94,9 @@ fn test_human_mobility_trait() {
 #[test]
 fn test_human_summarizable_trait() {
     let human = Human::builder()
-        .name(NameParts::from_full_name("Test Person"))
+        .name(NameParts::from("Test Person"))
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     let summary = human.summary();
@@ -111,7 +111,7 @@ fn test_human_builder_uses_template() {
     let human = Human::builder()
         .designation("Template Test".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     // Verify appendages were created
@@ -123,13 +123,13 @@ fn test_human_unique_identifiers() {
     let human1 = Human::builder()
         .designation("Human 1".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     let human2 = Human::builder()
         .designation("Human 2".to_string())
         .sex(Sex::Female)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     // IDs should be unique (just verify they're different via string representation)

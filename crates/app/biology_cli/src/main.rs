@@ -3,6 +3,7 @@ use biology::anatomy::body::Body;
 use biology::ecosystem::environment::{Climate, Environment, Terrain};
 use biology::ecosystem::interactions::Interaction;
 use biology::ecosystem::population::Population;
+use biology::nomenclature::nomenclature::NomenclatureComponents;
 use biology::vitals::blood_pressure::BloodPressure;
 use biology::vitals::live_vitals::LiveVitals;
 use biology::vitals::vital_status::VitalStatus;
@@ -13,7 +14,7 @@ use core_shared::Centimeters;
 fn main() {
 
     let stephen = Human::builder()
-        .designation(String::from("Case #10288377"))
+        .name(NameParts::from("Stephen Burton"))
         .sex(Sex::Male)
         .with_vitals(VitalStatus::Alive(LiveVitals::new(
             BloodPressure(130, 40),
@@ -21,10 +22,11 @@ fn main() {
             BPM(25),
             25,
         )))
-        .using_template(&templates::regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&templates::regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     println!("{}", stephen.get_vitals());
+    println!("{} {}", stephen.first_name().unwrap(), stephen.last_name().unwrap());
 
     // Create an ecosystem with environmental context
     let desert_environment = Environment {

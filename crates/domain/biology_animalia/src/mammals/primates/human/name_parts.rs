@@ -1,3 +1,5 @@
+use biology::nomenclature::nomenclature::NomenclatureComponents;
+
 #[derive(Debug, Default, Clone)]
 pub struct NameParts {
     pub prefix: Option<String>,
@@ -8,9 +10,19 @@ pub struct NameParts {
 }
 
 impl NameParts {
-    pub fn from_full_name(full_name: &str) -> Self {
+    pub fn new(first: Option<&str>, middle: Option<&str>, last: Option<&str>) -> Self {
+        Self {
+            first: first.map(str::to_string),
+            middle: middle.map(str::to_string),
+            last: last.map(str::to_string),
+            ..Default::default()
+        }
+    }
+
+    pub fn from(full_name: &str) -> Self {
         let parts: Vec<&str> = full_name.split_whitespace().collect();
         match parts.len() {
+            0 => Self::default(),
             1 => Self {
                 first: Some(parts[0].to_string()),
                 ..Default::default()
@@ -28,5 +40,27 @@ impl NameParts {
             },
             _ => Self::default(),
         }
+    }
+}
+
+impl NomenclatureComponents for NameParts {
+    fn prefix_name(&self) -> Option<String> {
+        self.prefix.clone()
+    }
+
+    fn first_name(&self) -> Option<String> {
+        self.first.clone()
+    }
+
+    fn middle_name(&self) -> Option<String> {
+        self.middle.clone()
+    }
+
+    fn last_name(&self) -> Option<String> {
+        self.last.clone()
+    }
+
+    fn suffix_name(&self) -> Option<String> {
+        self.suffix.clone()
     }
 }

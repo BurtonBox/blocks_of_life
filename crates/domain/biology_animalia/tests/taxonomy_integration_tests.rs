@@ -19,9 +19,9 @@ fn test_progressive_complexity() {
 
     // Complex: Detailed Human (full builder, detailed anatomy)
     let human = Human::builder()
-        .name(NameParts::from_full_name("John Doe"))
+        .name(NameParts::from("John Doe"))
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
     assert_eq!(human.display_name(), "John Doe");
     assert_eq!(human.appendages.len(), 4);
@@ -35,7 +35,7 @@ fn test_all_types_summarizable() {
     let human = Human::builder()
         .designation("Test Human".to_string())
         .sex(Sex::Unknown)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     // All should produce summaries
@@ -53,7 +53,7 @@ fn test_import_paths() {
     let _human: Human = Human::builder()
         .designation("Test".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     // If this compiles, the re-exports work correctly
@@ -68,7 +68,7 @@ fn test_polymorphic_collection() {
     let human = Human::builder()
         .designation("Polymorphic Test".to_string())
         .sex(Sex::Male)
-        .using_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
+        .with_anatomy_template(&regional_defaults::AVG_NORTH_AMERICAN_MALE)
         .build();
 
     // All can be treated as Summarizable

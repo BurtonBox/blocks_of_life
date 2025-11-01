@@ -20,12 +20,30 @@ The repository's commit history tells a story. We began with a simple, flawed mo
 
 This project serves as a practical, hands-on example of several key software design patterns:
 
-* **Polymorphism**  
-* **Composition**  
-* **The Builder Pattern**  
-* **The Factory Pattern** (using for\_region before evolving to Templates)  
-* **The Template Pattern** (for data-driven defaults)  
+* **Polymorphism**
+* **Composition**
+* **The Builder Pattern**
+* **The Factory Pattern** (using for\_region before evolving to Templates)
+* **The Template Pattern** (for data-driven defaults)
 * **Separation of Concerns** (separating data, logic, and presentation)
+
+## **Module Documentation**
+
+Each module has detailed documentation explaining its design patterns and usage:
+
+### Kingdom Implementation (`biology_animalia` crate)
+
+* **[Biology Animalia - API Design Guide](crates/domain/biology_animalia/README.md)** - **START HERE**: Progressive complexity pattern, when to use generic vs. specialized models, development guidelines
+
+### Core Domain Modules (`biology` crate)
+
+* **[Characteristics](crates/domain/biology/src/characteristics/README.md)** - Core trait definitions (Anatomy, Mobility, Summarizable)
+* **[Patterns](crates/domain/biology/src/patterns/README.md)** - Reusable trait implementations and helper utilities
+* **[Anatomy](crates/domain/biology/src/anatomy/README.md)** - Composition over inheritance with struct-variant enums
+* **[Templates](crates/domain/biology/src/templates/README.md)** - Data-driven design with regional defaults
+* **[Vitals](crates/domain/biology/src/vitals/README.md)** - Sum types and type-safe measurement wrappers
+* **[Nomenclature](crates/domain/biology/src/nomenclature/README.md)** - Two-trait naming system (display vs. structured access)
+* **[Ecosystem](crates/domain/biology/src/ecosystem/README.md)** - Higher-level composition (populations, environments, interactions)
 
 ## **Getting Started**
 
@@ -34,5 +52,8 @@ To see the current model in action, simply clone the repository and run the main
 git clone \[https://github.com/your-username/blocks\_of\_life.git\](https://github.com/your-username/blocks\_of\_life.git)  
 cd blocks\_of\_life  
 cargo run
+or
+cargo test
+
 
 This will print a summary of the entities currently defined in main.rs, showcasing the dynamic anatomy descriptions based on their constructed state.

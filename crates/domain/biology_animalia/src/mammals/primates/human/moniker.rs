@@ -1,5 +1,6 @@
 use crate::NameParts;
 use biology::Nomenclature;
+use biology::nomenclature::nomenclature::NomenclatureComponents;
 
 #[derive(Debug, Clone)]
 pub enum Moniker {
@@ -30,6 +31,44 @@ impl Nomenclature for Moniker {
                 parts.join(" ")
             }
             Moniker::Designation(title) => title.clone(),
+        }
+    }
+}
+
+impl NomenclatureComponents for Moniker {
+
+    fn prefix_name(&self) -> Option<String> {
+        match self {
+            Moniker::Name(name) => name.prefix_name(),
+            Moniker::Designation(_) => None,
+        }
+    }
+
+    fn first_name(&self) -> Option<String> {
+        match self {
+            Moniker::Name(name) => name.first_name(),
+            Moniker::Designation(_) => None,
+        }
+    }
+
+    fn middle_name(&self) -> Option<String> {
+        match self {
+            Moniker::Name(name) => name.middle_name(),
+            Moniker::Designation(_) => None,
+        }
+    }
+
+    fn last_name(&self) -> Option<String> {
+        match self {
+            Moniker::Name(name) => name.last_name(),
+            Moniker::Designation(_) => None,
+        }
+    }
+
+    fn suffix_name(&self) -> Option<String> {
+        match self {
+            Moniker::Name(name) => name.suffix_name(),
+            Moniker::Designation(_) => None,
         }
     }
 }

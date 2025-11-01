@@ -10,18 +10,18 @@ use biology::Sex;
 use biology::templates::anatomy::AnatomyTemplate;
 
 pub struct HumanBuilder {
-    pub id: Identifier,
-    pub name_prefix: Option<String>,
-    pub name_first: Option<String>,
-    pub name_middle: Option<String>,
-    pub name_last: Option<String>,
-    pub name_suffix: Option<String>,
-    pub name_moniker: Option<NameParts>,
-    pub name_designation: Option<String>,
-    pub sex: Sex,
-    pub vitals: VitalStatus,
-    pub arm_measurements: ArmMeasurements,
-    pub leg_measurements: LegMeasurements,
+    id: Identifier,
+    name_prefix: Option<String>,
+    name_first: Option<String>,
+    name_middle: Option<String>,
+    name_last: Option<String>,
+    name_suffix: Option<String>,
+    name_moniker: Option<NameParts>,
+    name_designation: Option<String>,
+    sex: Sex,
+    vitals: VitalStatus,
+    arm_measurements: ArmMeasurements,
+    leg_measurements: LegMeasurements,
 }
 
 impl HumanBuilder {
@@ -63,7 +63,7 @@ impl HumanBuilder {
     }
 
     // A method to load all measurements from a template.
-    pub fn using_template(mut self, template: &AnatomyTemplate) -> Self {
+    pub fn with_anatomy_template(mut self, template: &AnatomyTemplate) -> Self {
         self.arm_measurements = template.arm_measurements;
         self.leg_measurements = template.leg_measurements;
         self

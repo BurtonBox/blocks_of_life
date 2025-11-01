@@ -1,10 +1,7 @@
 use crate::{HumanBuilder, Moniker};
 use biology::{Nomenclature, Sex};
 use biology::anatomy::appendage::Appendage;
-use biology::anatomy::arm_measurements::ArmMeasurements;
-use biology::anatomy::leg_measurements::LegMeasurements;
 use biology::anatomy::limb_status::LimbStatus;
-use biology::vitals::live_vitals::LiveVitals;
 use biology::vitals::vital_status::VitalStatus;
 use core_shared::{Direction, Identifier};
 
@@ -19,22 +16,10 @@ pub struct Human {
 impl Human {
 
     pub fn builder() -> HumanBuilder {
-        HumanBuilder {
-            id: Identifier::new(),
-            name_prefix: None,
-            name_first: None,
-            name_middle: None,
-            name_last: None,
-            name_suffix: None,
-            name_moniker: None,
-            name_designation: None,
-            sex: Sex::Unknown,
-            vitals: VitalStatus::Alive(LiveVitals::default()),
-            arm_measurements: ArmMeasurements::default(),
-            leg_measurements: LegMeasurements::default(),
-        }
+       HumanBuilder::new()
     }
 
+    #[allow(unused_variables)]
     pub fn set_limb_status(
         &mut self,
         target_side: Direction,
