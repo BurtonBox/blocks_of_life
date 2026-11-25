@@ -2,11 +2,11 @@ use crate::{Human};
 use biology::Nomenclature;
 
 pub trait NomenclatureComponents {
-    fn prefix_name(&self) -> Option<String>;
-    fn first_name(&self) -> Option<String>;
-    fn middle_name(&self) -> Option<String>;
-    fn last_name(&self) -> Option<String>;
-    fn suffix_name(&self) -> Option<String>;
+    fn prefix_name(&self) -> Option<&str>;
+    fn first_name(&self) -> Option<&str>;
+    fn middle_name(&self) -> Option<&str>;
+    fn last_name(&self) -> Option<&str>;
+    fn suffix_name(&self) -> Option<&str>;
 }
 
 impl Nomenclature for Human {
@@ -17,23 +17,23 @@ impl Nomenclature for Human {
 
 impl NomenclatureComponents for Human {
 
-    fn prefix_name(&self) -> Option<String> {
+    fn prefix_name(&self) -> Option<&str> {
         self.name.prefix_name()
     }
 
-    fn first_name(&self) -> Option<String> {
+    fn first_name(&self) -> Option<&str> {
         self.name.first_name()
     }
 
-    fn middle_name(&self) -> Option<String> {
+    fn middle_name(&self) -> Option<&str> {
         self.name.middle_name()
     }
 
-    fn last_name(&self) -> Option<String> {
+    fn last_name(&self) -> Option<&str> {
         self.name.last_name()
     }
 
-    fn suffix_name(&self) -> Option<String> {
+    fn suffix_name(&self) -> Option<&str> {
         self.name.suffix_name()
     }
 }
