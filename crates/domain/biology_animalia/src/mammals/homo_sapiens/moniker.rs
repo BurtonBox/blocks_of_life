@@ -49,35 +49,35 @@ impl Nomenclature for Moniker {
 
 impl NomenclatureComponents for Moniker {
 
-    fn prefix_name(&self) -> Option<String> {
+    fn prefix_name(&self) -> Option<&str> {
         match self {
             Moniker::Name(name) => name.prefix_name(),
             Moniker::Designation(_) => None,
         }
     }
 
-    fn first_name(&self) -> Option<String> {
+    fn first_name(&self) -> Option<&str> {
         match self {
             Moniker::Name(name) => name.first_name(),
             Moniker::Designation(_) => None,
         }
     }
 
-    fn middle_name(&self) -> Option<String> {
+    fn middle_name(&self) -> Option<&str> {
         match self {
             Moniker::Name(name) => name.middle_name(),
             Moniker::Designation(_) => None,
         }
     }
 
-    fn last_name(&self) -> Option<String> {
+    fn last_name(&self) -> Option<&str> {
         match self {
             Moniker::Name(name) => name.last_name(),
             Moniker::Designation(_) => None,
         }
     }
 
-    fn suffix_name(&self) -> Option<String> {
+    fn suffix_name(&self) -> Option<&str> {
         match self {
             Moniker::Name(name) => name.suffix_name(),
             Moniker::Designation(_) => None,

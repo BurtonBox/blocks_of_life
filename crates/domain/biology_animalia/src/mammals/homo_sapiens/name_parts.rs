@@ -12,9 +12,9 @@ pub struct NameParts {
 impl NameParts {
     pub fn new(first: Option<&str>, middle: Option<&str>, last: Option<&str>) -> Self {
         Self {
-            first: first.map(str::to_string),
-            middle: middle.map(str::to_string),
-            last: last.map(str::to_string),
+            first: first.map(str::to_owned),
+            middle: middle.map(str::to_owned),
+            last: last.map(str::to_owned),
             ..Default::default()
         }
     }
@@ -26,18 +26,18 @@ impl From<&str> for NameParts {
         match parts.len() {
             0 => Self::default(),
             1 => Self {
-                first: Some(parts[0].to_string()),
+                first: Some(parts[0].to_owned()),
                 ..Default::default()
             },
             2 => Self {
-                first: Some(parts[0].to_string()),
-                last: Some(parts[1].to_string()),
+                first: Some(parts[0].to_owned()),
+                last: Some(parts[1].to_owned()),
                 ..Default::default()
             },
             3 => Self {
-                first: Some(parts[0].to_string()),
-                middle: Some(parts[1].to_string()),
-                last: Some(parts[2].to_string()),
+                first: Some(parts[0].to_owned()),
+                middle: Some(parts[1].to_owned()),
+                last: Some(parts[2].to_owned()),
                 ..Default::default()
             },
             _ => Self::default(),
@@ -46,23 +46,23 @@ impl From<&str> for NameParts {
 }
 
 impl NomenclatureComponents for NameParts {
-    fn prefix_name(&self) -> Option<String> {
-        self.prefix.clone()
+    fn prefix_name(&self) -> Option<&str> {
+        self.prefix.as_deref()
     }
 
-    fn first_name(&self) -> Option<String> {
-        self.first.clone()
+    fn first_name(&self) -> Option<&str> {
+        self.first.as_deref()
     }
 
-    fn middle_name(&self) -> Option<String> {
-        self.middle.clone()
+    fn middle_name(&self) -> Option<&str> {
+        self.middle.as_deref()
     }
 
-    fn last_name(&self) -> Option<String> {
-        self.last.clone()
+    fn last_name(&self) -> Option<&str> {
+        self.last.as_deref()
     }
 
-    fn suffix_name(&self) -> Option<String> {
-        self.suffix.clone()
+    fn suffix_name(&self) -> Option<&str> {
+        self.suffix.as_deref()
     }
 }
